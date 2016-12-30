@@ -96,7 +96,8 @@ when (ETA:APOAPSIS <= 10) then{
 
 local end to false.
 
-when (ship:PERIAPSIS >= 95000 and ship:apoapsis >=100000) then{
+//when (ship:PERIAPSIS >= 95000 and ship:apoapsis >=100000) then{
+when (abs(ship:PERIAPSIS - ship:apoapsis) <= 2000) then{
 	lock throttle to 0.
 	print "circularization complete".
 	print "Currently in a stabe orbit of "+apoapsis+ " by "+periapsis.
