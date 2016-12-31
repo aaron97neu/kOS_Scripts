@@ -30,11 +30,12 @@ when (true) then{
 	preserve.
 }
 
-
+local end to false.
 until ship:apoapsis >= 101000 {
 	list engines in listengines.
 	for eng in listengines{
 		if(eng:flameout){
+			//wait .5.
 			stage.
 			print "Staging".
 			break.
@@ -88,18 +89,32 @@ print "Orbital injection complete.".
 
 lock throttle to 0.
 lock steering to prograde.
-when (ETA:APOAPSIS <= 10) then{
+when (ETA:APOAPSIS <= 30) then{
 	lock throttle to 1.
 	print "Circularizing".
 
 }.
+until end{
+	list engines in listengines.
+	for eng in listengines{
+		if(eng:flameout){
+			stage.
+			print "Staging".
+			break.
+		}
+	}
+}
 
-local end to false.
 
-when ((ship:PERIAPSIS >= 95000 and ship:apoapsis >=100000) or ((ship:PERIAPSIS - ship:apoapsis) <= 2000)) then{
+when ((ship:PERIAPSIS >= 95000 and ship:apoapsis >=100000) or (abs(ship:PERIAPSIS - ship:apoapsis) <= 2000) or (ship:apoapsis > 300000)) then{
 	lock throttle to 0.
 	print "circularization complete".
-	print "Currently in a stabe orbit of "+apoapsis+ " by "+periapsis.
+                if(ship:periapsis > 70000){
+	            print "Currently in a stabe orbit of "+apoapsis+ " by "+periapsis.
+                }else{
+                            lock steering to retrograde.
+                            wait 5.
+                }
 	set end to true.
 }
 
