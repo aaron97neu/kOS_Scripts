@@ -29,8 +29,10 @@ when (true) then{
 	print "Max pitch: "+pitchmax+" Min pitch "+pitchmin at (0,35).
 	preserve.
 }
-
+local twr to 0.
 local end to false.
+local thrott to 1.
+lock throttle to thrott.
 until ship:apoapsis >= 101000 {
 	list engines in listengines.
 	for eng in listengines{
@@ -41,7 +43,12 @@ until ship:apoapsis >= 101000 {
 			break.
 		}
 	}
-	
+	set twr to availablethrust/mass.
+	if(twr > 1.3){
+		set thrott to (thrott - .001). 
+	}else if(twr < 1.01){
+		set thrott to (thrott + .001).
+	}
 
 
 	if(SHIP:VELOCITY:SURFACE:MAG > 50 and SHIP:VELOCITY:SURFACE:MAG < 100){
@@ -114,9 +121,12 @@ when ((ship:PERIAPSIS >= 95000 and ship:apoapsis >=100000) or (abs(ship:PERIAPSI
                 }else{
                             lock steering to retrograde.
                             wait 5.
+			    print "Currently in an unstable orbit of "+apoapsis+" by "+periapsis.
                 }
 	set end to true.
 }
 
 until (end){
 }
+
+SET SHIP:CONTROL:PILOTMAINTHROTTLE TO 0.
