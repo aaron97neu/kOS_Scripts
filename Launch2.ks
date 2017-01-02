@@ -166,38 +166,5 @@ until done{
 
 }
 remove circnode.
-//Depreciated. Now using manuver nodes
-//*when (ETA:APOAPSIS <= 30) then{
-//	lock throttle to 1.
-//	print "Circularizing".
-//
-//}.
-//until end{
-//	list engines in listengines.
-//	for eng in listengines{
-//		if(eng:flameout){
-//			stage.
-//			print "Staging".
-//			break.
-//		}
-//	}
-//	print (ship:PERIAPSIS >= 95000 and ship:apoapsis >=96000) at (0,
-//}
-//
-//when ((ship:PERIAPSIS >= 95000 and ship:apoapsis >=96000) or (abs(ship:PERIAPSIS - ship:apoapsis) <= 2000) or (ship:apoapsis > 300000)) then{
-//	lock throttle to 0.
-//	print "circularization complete".
-//                if(ship:periapsis > 70000){
-//	            print "Currently in a stabe orbit of "+apoapsis+ " by "+periapsis.
-//                }else{
-//                            lock steering to retrograde.
-//                            wait 5.
-//			    print "Currently in an unstable orbit of "+apoapsis+" by "+periapsis.
-//                }
-//	set end to true.
-//}*/
-
-until (end){
-}
 
 SET SHIP:CONTROL:PILOTMAINTHROTTLE TO 0.
